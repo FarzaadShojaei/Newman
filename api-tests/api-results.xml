@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="ci-demo" tests="3" time="0.089">
+  <testsuite name="Check Health" id="d3e628a9-7f7a-483f-931d-e3fa23dc2c9f" timestamp="2024-02-15T14:36:25.567Z" tests="2" failures="0" errors="0" time="0.080">
+    <testcase name="Body matches string" time="0.080" classname="CiDemo"/>
+    <testcase name="Status code is 200" time="0.080" classname="CiDemo"/>
+  </testsuite>
+  <testsuite name="Check Not Implemented" id="61a16e83-e0f6-40cf-9380-ee3c54711483" timestamp="2024-02-15T14:36:25.567Z" tests="2" failures="0" errors="0" time="0.006">
+    <testcase name="Body matches string" time="0.006" classname="CiDemo"/>
+    <testcase name="Status code is 501" time="0.006" classname="CiDemo"/>
+  </testsuite>
+  <testsuite name="Check New Kids" id="d994fc33-d9ea-4520-b7da-6cec9aed85b1" timestamp="2024-02-15T14:36:25.567Z" tests="3" failures="0" errors="0" time="0.003">
+    <testcase name="Status code is 200" time="0.003" classname="CiDemo"/>
+    <testcase name="Make sure Donnie is in the list" time="0.003" classname="CiDemo"/>
+    <testcase name="Make sure Mark is not in the list" time="0.003" classname="CiDemo"/>
+  </testsuite>
+</testsuites>

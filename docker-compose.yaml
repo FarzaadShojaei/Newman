@@ -1,0 +1,16 @@
+services:
+  app:
+    image: ci-demo:latest
+    ports:
+      - "3000"
+  app-test:
+    image: postman/newman_ubuntu1404:4.5.5
+    depends_on:
+      - app
+    entrypoint: [""]
+    volumes:
+      - $PWD/api-tests:/etc/newman
+    command: >
+        newman run ci-demo.postman_collection.json 
+        --environment="ci.postman_environment.json" 
+        --reporters cli,junit --reporter-junit-export /etc/newman/api-results.xml
