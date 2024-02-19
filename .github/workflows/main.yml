@@ -1,0 +1,42 @@
+name: CI Workflow
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker:dind
+        options: --privileged
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+    - name: Build Docker image
+      run: docker build -t ci-demo:latest .
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker:dind
+        options: --privileged
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+    - name: Run tests with Docker Compose
+      run: |
+        docker-compose up --abort-on-container-exit --exit-code-from app-test
+    - name: Cleanup Docker Compose
+      run: |
+        docker-compose down --rmi local --remove-orphans
+    - name: Upload test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: api-results
+        path: api-tests/api-results.xml
